@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/onBoardFragment">
+
+    <fragment
+        android:id="@+id/onBoardFragment"
+        android:name="com.example.noteapp.ui.OnBoardFragment"
+        android:label="OnBoardFragment" />
+    <fragment
+        android:id="@+id/onBoardViewPagerFragment"
+        android:name="com.example.noteapp.ui.OnBoardViewPagerFragment"
+        android:label="OnBoardViewPagerFragment" />
+</navigation>
