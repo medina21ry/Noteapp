@@ -1,6 +1,5 @@
-package com.example.noteapp.ui
+package com.example.noteapp.ui.fragment
 
-import android.app.Fragment
 import android.os.Bundle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 

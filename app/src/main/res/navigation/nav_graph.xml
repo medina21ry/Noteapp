@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph.xml"
     app:startDestination="@id/onBoardFragment">
 
     <fragment
         android:id="@+id/onBoardFragment"
-        android:name="com.example.noteapp.ui.OnBoardFragment"
-        android:label="OnBoardFragment" />
+        android:name="com.example.noteapp.ui.fragment.OnBoardFragment"
+        android:label="OnBoardFragment" >
+        <action
+            android:id="@+id/action_onBoardFragment_to_noteFragment"
+            app:destination="@id/noteFragment" />
+    </fragment>
     <fragment
         android:id="@+id/onBoardViewPagerFragment"
-        android:name="com.example.noteapp.ui.OnBoardViewPagerFragment"
+        android:name="com.example.noteapp.ui.fragment.OnBoardViewPagerFragment"
         android:label="OnBoardViewPagerFragment" />
+    <fragment
+        android:id="@+id/noteFragment"
+        android:name="com.example.noteapp.ui.fragment.NoteFragment"
+        android:label="fragment_note"
+        tools:layout="@layout/fragment_note" />
 </navigation>
