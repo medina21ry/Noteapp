@@ -8,15 +8,18 @@
 
     <fragment
         android:id="@+id/detailNoteFragment"
-        android:name="DetailNoteFragment"
+        android:name="com.example.noteapp.ui.fragment.note.DetailNoteFragment"
         android:label="DetailNoteFragment" >
         <action
             android:id="@+id/action_detailNoteFragment_to_noteFragment"
             app:destination="@id/noteFragment" />
+        <argument
+            android:name="noteId"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/noteFragment"
-        android:name="NoteFragment"
+        android:name="com.example.noteapp.ui.fragment.note.NoteFragment"
         android:label="NoteFragment" >
         <action
             android:id="@+id/action_noteFragment_to_detailNoteFragment"
