@@ -7,30 +7,59 @@
 
 
     <fragment
+        android:id="@+id/noteFragment"
+        android:name="com.example.noteapp.ui.fragment.note.NoteFragment"
+        android:label="fragment_note"
+        tools:layout="@layout/fragment_note">
+        <action
+            android:id="@+id/action_noteFragment_to_detailNoteFragment"
+            app:destination="@id/detailNoteFragment" />
+        <action
+            android:id="@+id/action_noteFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/onBoardFragment"
+        android:name="com.example.noteapp.ui.fragment.onboard.OnBoardFragment"
+        android:label="fragment_on_board"
+        tools:layout="@layout/fragment_on_board">
+        <action
+            android:id="@+id/action_onBoardFragment_to_noteFragment"
+            app:destination="@id/noteFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/onBoardViewPagerFragment"
+        android:name="com.example.noteapp.ui.fragment.onboard.OnBoardViewPagerFragment"
+        android:label="fragment_on_board_view_pager"
+        tools:layout="@layout/fragment_on_board_view_pager" />
+
+    <fragment
         android:id="@+id/detailNoteFragment"
         android:name="com.example.noteapp.ui.fragment.note.DetailNoteFragment"
-        android:label="DetailNoteFragment">
+        android:label="fragment_detail_note"
+        tools:layout="@layout/fragment_detail_note" >
         <action
             android:id="@+id/action_detailNoteFragment_to_noteFragment"
             app:destination="@id/noteFragment" />
         <argument
             android:name="noteId"
-            app:argType="integer" />
+            app:argType="integer"/>
     </fragment>
     <fragment
-        android:id="@+id/noteFragment"
-        android:name="com.example.noteapp.ui.fragment.note.NoteFragment"
-        android:label="NoteFragment">
-        <action
-            android:id="@+id/action_noteFragment_to_detailNoteFragment"
-            app:destination="@id/detailNoteFragment" />
-    </fragment>
+        android:id="@+id/signUpFragment"
+        android:name="com.example.noteapp.ui.fragment.signup.SignUpFragment"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" />
     <fragment
-        android:id="@+id/onBoardFragment"
-        android:name="OnBoardFragment"
-        android:label="OnBoardFragment">
-        <action
-            android:id="@+id/action_onBoardFragment_to_noteFragment"
-            app:destination="@id/noteFragment" />
-    </fragment>
+        android:id="@+id/chatFragment"
+        android:name="com.example.noteapp.ui.fragment.chat.ChatFragment"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat" />
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.example.noteapp.ui.activity.MainActivity"
+        android:label="app_bar_drawer"
+        tools:layout="@layout/app_bar_drawer" />
 </navigation>

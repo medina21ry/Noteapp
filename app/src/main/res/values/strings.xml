@@ -20,6 +20,16 @@
     <string name="reg_google">Регистрация с Google</string>
     <string name="google_sign">Войти в Google</string>
 
+    <string name="title_activity_drawer">DrawerActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Aruuke Rakhmanova</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="chat">Чат</string>
+
     <string name="tab1_text">Tab 1</string>
     <string name="tab1_description">First tab content</string>
     <string name="tab2_text">Tab 2</string>
