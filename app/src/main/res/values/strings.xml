@@ -16,8 +16,9 @@
     <string name="title_detail">Заголовок</string>
     <string name="description_detail">Описание</string>
     <string name="finish">Готово</string>
-
-
+    <string name="id_client_token">689993855429-vmfk02q62djhtm68ko07hn3cgun402ug.apps.googleusercontent.com</string>
+    <string name="reg_google">Регистрация с Google</string>
+    <string name="google_sign">Войти в Google</string>
 
     <string name="tab1_text">Tab 1</string>
     <string name="tab1_description">First tab content</string>
