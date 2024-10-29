@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <TextView
+        android:id="@+id/tv_on"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|top"
+        tools:text="Hello"
+        android:layout_marginTop="500dp"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="80dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/anim1" />
+
+    <ImageView
+        android:id="@+id/point1"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_gravity="center|bottom"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="82dp"
+        android:src="@drawable/orange_point"/>
+
+    <ImageView
+        android:id="@+id/point2"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_gravity="center|bottom"
+        android:layout_marginBottom="82dp"
+        android:src="@drawable/gray_point"/>
+
+    <ImageView
+        android:id="@+id/point3"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="20dp"
+        android:layout_gravity="center|bottom"
+        android:layout_marginBottom="82dp"
+        android:src="@drawable/gray_point"/>
+
+</FrameLayout>
