@@ -58,4 +58,11 @@ dependencies {
     // Room
     val roomVersion = "2.6.1"
     implementation("androidx.room:room-ktx:$roomVersion")
+
+    //Firebase
+    implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
+    implementation("com.google.firebase:firebase-analytics")
+    //Google auth
+    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.android.gms:play-services-auth:21.2.0")
 }
