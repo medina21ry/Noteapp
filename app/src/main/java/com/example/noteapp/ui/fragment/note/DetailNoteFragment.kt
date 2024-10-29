@@ -45,13 +45,11 @@ class DetailNoteFragment : Fragment() {
             noteId = it.getInt("noteId", -1)
         }
         if (noteId != -1) {
-            val noteDao = App.getDatabase().noteDao()
-            val model = noteDao.getNoteById(noteId)  // Получение заметки
-
-            model?.let {
-                binding.etTitle.setText(it.title)
-                binding.etDescription.setText(it.description)
-                selectedColor = it.selectedColor
+            val noteDao = App().getInstance()?.noteDao()
+            noteDao?.getNoteById(noteId)?.let { model ->
+                binding.etTitle.setText(model.title)
+                binding.etDescription.setText(model.description)
+                selectedColor = model.selectedColor
                 updateBackgroundColor()
             }
         }
@@ -64,13 +62,12 @@ class DetailNoteFragment : Fragment() {
             val currentDate = binding.tvDate.text.toString()
             val currentTime = binding.tvTime.text.toString()
 
-            val noteDao = App.getDatabase().noteDao()
             if (noteId != -1) {
                 val updateNote = NoteModel(etTitle, etDescription, currentDate, currentTime, selectedColor)
                 updateNote.id = noteId
-                noteDao.updateNote(updateNote)  // Обновление заметки
+                App().getInstance()?.noteDao()?.updateNote(updateNote)
             } else {
-                noteDao.insertNote(NoteModel(etTitle, etDescription, currentDate, currentTime, selectedColor))  // Вставка новой заметки
+                App().getInstance()?.noteDao()?.insertNote(NoteModel(etTitle, etDescription, currentDate, currentTime, selectedColor))
             }
             findNavController().navigate(R.id.action_detailNoteFragment_to_noteFragment)
         }
@@ -100,27 +97,28 @@ class DetailNoteFragment : Fragment() {
         }
     }
 
-    private fun setTextColor(color: Int) {
-        val context = requireContext()
-        binding.etDescription.setTextColor(ContextCompat.getColor(context, color))
-        binding.etTitle.setTextColor(ContextCompat.getColor(context, color))
-        binding.tvDate.setTextColor(ContextCompat.getColor(context, color))
-        binding.tvTime.setTextColor(ContextCompat.getColor(context, color))
-    }
-
     private fun updateBackgroundColor() {
         val context = requireContext()
         val colorResId = when (selectedColor) {
             "white" -> {
-                setTextColor(R.color.beige)
+                binding.etDescription.setTextColor(ContextCompat.getColor(context, R.color.beige))
+                binding.etTitle.setTextColor(ContextCompat.getColor(context, R.color.beige))
+                binding.tvDate.setTextColor(ContextCompat.getColor(context, R.color.beige))
+                binding.tvTime.setTextColor(ContextCompat.getColor(context, R.color.beige))
                 R.color.whiteRadio
             }
             "red" -> {
-                setTextColor(R.color.orange)
+                binding.etDescription.setTextColor(ContextCompat.getColor(context, R.color.orange))
+                binding.etTitle.setTextColor(ContextCompat.getColor(context, R.color.orange))
+                binding.tvDate.setTextColor(ContextCompat.getColor(context, R.color.orange))
+                binding.tvTime.setTextColor(ContextCompat.getColor(context, R.color.orange))
                 R.color.redRadio
             }
             else -> {
-                setTextColor(R.color.white)
+                binding.etTitle.setTextColor(ContextCompat.getColor(context, R.color.white))
+                binding.etDescription.setTextColor(ContextCompat.getColor(context, R.color.white))
+                binding.tvDate.setTextColor(ContextCompat.getColor(context, R.color.white))
+                binding.tvTime.setTextColor(ContextCompat.getColor(context, R.color.white))
                 R.color.blackRadio
             }
         }

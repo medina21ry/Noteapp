@@ -10,7 +10,7 @@ import androidx.room.Update
 @Dao
 interface NoteDao {
 
-    @Query("SELECT * FROM noteModel")
+    @Query ("SELECT * FROM noteModel")
     fun getAll(): LiveData<List<NoteModel>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -19,8 +19,8 @@ interface NoteDao {
     @Delete
     fun deleteNote(noteModel: NoteModel)
 
-    @Query("SELECT * FROM noteModel WHERE id = :id")
-    fun getNoteById(id: Int): NoteModel?
+    @Query ("SELECT * FROM noteModel WHERE id = :id")
+    fun getNoteById(id:Int): NoteModel
 
     @Update
     fun updateNote(noteModel: NoteModel)
