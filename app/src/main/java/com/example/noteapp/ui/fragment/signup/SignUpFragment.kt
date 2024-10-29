@@ -25,10 +25,11 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.auth
 
 class SignUpFragment : Fragment() {
+
     private lateinit var binding: FragmentSignUpBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
-private lateinit var preferenceHelper: SharedPreferenceHelper
+    private lateinit var preferenceHelper: SharedPreferenceHelper
     private val signInLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {

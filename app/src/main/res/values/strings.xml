@@ -2,7 +2,6 @@
     <string name="app_name">Noteapp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="skip">Пропустить</string>
     <string name="getting_started">Начать Работу</string>
     <string name="Search_for_notes">Поиск заметок</string>
     <string name="add">add</string>
@@ -15,7 +14,11 @@
     <string name="time">12:45</string>
     <string name="title_detail">Заголовок</string>
     <string name="description_detail">Описание</string>
-    <string name="finish">Готово</string>
+    <string name="finish">Готово</string> <string name="skip">Пропустить</string>
+    <string name="start_work">Начать работу</string>
+    <string name="enter_text">Введите текст</string>
+    <string name="save_text">Сохранить</string>
+
     <string name="id_client_token">689993855429-vmfk02q62djhtm68ko07hn3cgun402ug.apps.googleusercontent.com</string>
     <string name="reg_google">Регистрация с Google</string>
     <string name="google_sign">Войти в Google</string>
