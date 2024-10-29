@@ -1,99 +1,87 @@
-<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".noteApp.ui.fragment.note.NoteFragment">
+    tools:context=".ui.fragment.note.NoteFragment">
 
-    <com.google.android.material.tabs.TabLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/light_black"
-        android:paddingTop="12dp" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/black2"
+            android:padding="10dp">
 
-        <ImageView
-            android:id="@+id/menu"
-            android:layout_width="wrap_content"
+            <ImageView
+                android:id="@+id/img_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/menu" />
+
+            <TextView
+                android:id="@+id/tv_note"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:letterSpacing="0.1"
+                android:text="@string/notes"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/btn_change_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_grid_layout" />
+        </RelativeLayout>
+
+        <EditText
+            android:id="@+id/et_search"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:letterSpacing="0.1"
+            android:textColor="@color/white"
+            android:background="@drawable/bg_ed"
+            android:drawableStart="@drawable/search"
+            android:drawablePadding="11dp"
+            android:hint="@string/search_notes"
+            android:padding="15dp"
+            android:singleLine="true"
+            android:textColorHint="#505050"
+            android:textSize="12sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/baseline_dehaze_24"
-            android:backgroundTint="@color/gray"
-            android:importantForAccessibility="no"
-            android:padding="16dp" />
-
-        <ImageView
-            android:id="@+id/grid_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="15dp"
-            android:background="@drawable/baseline_dashboard_24"
-            android:backgroundTint="@color/gray"
-            android:importantForAccessibility="no"
-            android:padding="16dp" />
-
-        <ImageView
-            android:id="@+id/liner_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="15dp"
-            android:background="@drawable/baseline_dehaze_24"
-            android:backgroundTint="@color/gray"
-            android:importantForAccessibility="no"
-            android:padding="16dp"
-            android:visibility="invisible" />
-
-    </FrameLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|top"
-        android:layout_marginTop="17dp"
-        android:text="@string/notes"
-        android:textColor="@color/gray"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|center"
-        android:layout_marginHorizontal="28dp"
-        android:layout_marginTop="72dp"
-        android:background="@drawable/style_et"
-        android:hint="@string/Search_for_notes"
-        android:paddingVertical="14dp"
-        android:textColor="@color/white"
-        android:textColorHint="@color/dark_gray"
-        tools:ignore="Autofill,TextFields" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_note"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
-        android:padding="16dp"
-        tools:listitem="@layout/item_note" />
+            android:layout_marginEnd="20dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_note" />
+    </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_btn"
+        android:id="@+id/btn_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="20dp"
         android:backgroundTint="@color/orange"
-        android:src="@drawable/baseline_add_24" />
-
+        android:src="@android:drawable/ic_input_add"
+        android:tint="@color/white" />
 </FrameLayout>

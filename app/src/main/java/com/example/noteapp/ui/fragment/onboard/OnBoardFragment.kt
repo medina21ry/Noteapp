@@ -1,4 +1,3 @@
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +7,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.noteapp.R
 import com.example.noteapp.databinding.FragmentOnBoardBinding
-
+import com.google.android.material.tabs.TabLayout
 class OnBoardFragment : Fragment() {
     private lateinit var binding: FragmentOnBoardBinding
     override fun onCreateView(

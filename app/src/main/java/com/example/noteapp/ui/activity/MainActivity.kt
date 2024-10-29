@@ -20,16 +20,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_fragment) as NavHostFragment
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
 
-        navController = navHostFragment.navController
+        val navController = navHostFragment.navController
 
-        sharedPreferenceHelper = SharedPreferenceHelper(this@MainActivity)
-
-        if (!sharedPreferenceHelper.isOnBoardingComplete()) {
-            sharedPreferenceHelper.setOnBoardingComplete(true)
-        } else {
+        if (sharedPreferenceHelper.isOnBoardShown) {
             navController.navigate(R.id.noteFragment)
+        } else {
+            navController.navigate(R.id.onBoardFragment)
         }
     }
 }

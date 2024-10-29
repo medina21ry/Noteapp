@@ -5,29 +5,21 @@ import android.content.SharedPreferences
 
 class SharedPreferenceHelper(context: Context) {
 
-    private val sharedPreferences: SharedPreferences = context.getSharedPreferences(
-        "shared",
-        Context.MODE_PRIVATE
-    )
+    private lateinit var sharedPreference: SharedPreferences
 
-    fun setOnBoardingComplete(isComplete: Boolean) {
-        sharedPreferences.edit().putBoolean(SHOWED, isComplete).apply()
+    init {
+        unit(context)
     }
 
-    fun isOnBoardingComplete(): Boolean {
-        return sharedPreferences.getBoolean(SHOWED, false)
+    fun unit(context: Context){
+        sharedPreference = context.getSharedPreferences("shared", Context.MODE_PRIVATE)
     }
 
-    fun setIsGridLayout(isGridLayout: Boolean) {
-        sharedPreferences.edit().putBoolean(IS_GRID_LAYOUT, isGridLayout).apply()
-    }
+    var title: String?
+        get() = sharedPreference.getString("title", "")
+        set(value) = sharedPreference.edit().putString("title", value)!!.apply()
 
-    fun getIsGridLayout(): Boolean {
-        return sharedPreferences.getBoolean(IS_GRID_LAYOUT, false)
-    }
-
-    companion object{
-        const val SHOWED = "SHOWED"
-        const val IS_GRID_LAYOUT = "IS_GRID_LAYOUT"
-    }
+    var isOnBoardShown: Boolean
+        get() = sharedPreference.getBoolean("board", false)
+        set(value) = sharedPreference.edit().putBoolean("board", value).apply()
 }

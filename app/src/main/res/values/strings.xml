@@ -4,8 +4,23 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="skip">Пропустить</string>
     <string name="getting_started">Начать Работу</string>
-    <string name="notes">Заметки</string>
     <string name="Search_for_notes">Поиск заметок</string>
     <string name="add">add</string>
     <string name="ready">Готова</string>
+    <string name="notes">Заметки</string>
+    <string name="search_notes">Поиск заметок</string>
+    <string name="title">Нужно что сделать:</string>
+    <string name="description">убраться</string>
+    <string name="data">6 июня</string>
+    <string name="time">12:45</string>
+    <string name="title_detail">Заголовок</string>
+    <string name="description_detail">Описание</string>
+    <string name="finish">Готово</string>
+
+
+
+    <string name="tab1_text">Tab 1</string>
+    <string name="tab1_description">First tab content</string>
+    <string name="tab2_text">Tab 2</string>
+    <string name="tab2_description">Second tab content</string>
 </resources>

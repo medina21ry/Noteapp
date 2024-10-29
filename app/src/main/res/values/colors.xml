@@ -9,4 +9,12 @@
     <color name="light_black">#131212</color>
     <color name="light_cream">#EBE4C9</color>
     <color name="dark_brown">#571818</color>
+
+    <color name="black2">#131212</color>
+    <color name="black3">#191818</color>
+    <color name="gray1">#616161</color>
+    <color name="blackRadio">#191818</color>
+    <color name="whiteRadio">#EBE4C9</color>
+    <color name="redRadio">#571818</color>
+    <color name="beige">#A1865E</color>
 </resources>

@@ -1,25 +1,26 @@
 package com.example.noteapp.ui.fragment.note
+
 import NoteModel
-import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
-import androidx.fragment.app.Fragment
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.example.noteapp.App
 import com.example.noteapp.R
 import com.example.noteapp.databinding.FragmentDetailNoteBinding
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class DetailNoteFragment : Fragment() {
 
     private lateinit var binding: FragmentDetailNoteBinding
-    private var colorResource: Int = R.drawable.style
+    private var selectedColor: String = "black"
     private var noteId: Int = -1
 
     override fun onCreateView(
@@ -30,12 +31,13 @@ class DetailNoteFragment : Fragment() {
         return binding.root
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupListener()
+        currentDateTime()
+        setupRadioGroupListener()
         update()
-        setUpListeners()
-        displayCurrentDateTime()
+        textWatcher()
     }
 
     private fun update() {
@@ -43,86 +45,100 @@ class DetailNoteFragment : Fragment() {
             noteId = it.getInt("noteId", -1)
         }
         if (noteId != -1) {
-            val note = App().getInstance()?.noteDao()?.getNoteById(noteId)
-            note?.let { model ->
-                binding.etTitle.setText(model.title)
-                binding.etDescription.setText(model.description)
-                colorResource = model.color.toInt()
-                when (colorResource) {
-                    R.drawable.style -> binding.rb1.isChecked = true
-                    R.drawable.style_white -> binding.rb2.isChecked = true
-                    R.drawable.style_red -> binding.rb3.isChecked = true
-                }
+            val noteDao = App.getDatabase().noteDao()
+            val model = noteDao.getNoteById(noteId)  // Получение заметки
+
+            model?.let {
+                binding.etTitle.setText(it.title)
+                binding.etDescription.setText(it.description)
+                selectedColor = it.selectedColor
+                updateBackgroundColor()
             }
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun setUpListeners() {
-        val textWatcher = object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                binding.btnAdd.visibility =
-                    if (binding.etTitle.text.isNotEmpty() || binding.etDescription.text.isNotEmpty()) {
-                        View.VISIBLE
-                    } else {
-                        View.GONE
-                    }
-            }
-
-            override fun afterTextChanged(s: Editable?) {}
-        }
-
-        binding.etTitle.addTextChangedListener(textWatcher)
-        binding.etDescription.addTextChangedListener(textWatcher)
-
-        binding.btnAdd.setOnClickListener {
+    private fun setupListener() {
+        binding.btnAddText.setOnClickListener {
             val etTitle = binding.etTitle.text.toString()
             val etDescription = binding.etDescription.text.toString()
-            val itemDate = binding.date.text.toString()
-            val itemTime = binding.time.text.toString()
+            val currentDate = binding.tvDate.text.toString()
+            val currentTime = binding.tvTime.text.toString()
 
-            val noteModel = NoteModel(
-                title = etTitle,
-                description = etDescription,
-                date = itemDate,
-                time = itemTime,
-                color = colorResource.toString()
-            )
-
+            val noteDao = App.getDatabase().noteDao()
             if (noteId != -1) {
-                noteModel.id = noteId
-                App().getInstance()?.noteDao()?.updateNote(noteModel)
+                val updateNote = NoteModel(etTitle, etDescription, currentDate, currentTime, selectedColor)
+                updateNote.id = noteId
+                noteDao.updateNote(updateNote)  // Обновление заметки
             } else {
-                App().getInstance()?.noteDao()?.insertNote(noteModel)
+                noteDao.insertNote(NoteModel(etTitle, etDescription, currentDate, currentTime, selectedColor))  // Вставка новой заметки
             }
-            findNavController().navigateUp()
-        }
-
-        binding.returnBtn.setOnClickListener {
             findNavController().navigate(R.id.action_detailNoteFragment_to_noteFragment)
         }
-        binding.btnAdd.visibility = View.GONE
 
-        binding.radioGroup.setOnCheckedChangeListener { group, checkedId ->
-            colorResource = when (checkedId) {
-                binding.rb1.id -> R.drawable.style
-                binding.rb2.id -> R.drawable.style_white
-                binding.rb3.id -> R.drawable.style_red
-                else -> R.drawable.style
-            }
+        binding.imgBack.setOnClickListener {
+            findNavController().navigateUp()
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun displayCurrentDateTime() {
-        val currentDateTime = LocalDateTime.now()
-        val formatterDate = DateTimeFormatter.ofPattern("dd MMMM")
-        val formatterTime = DateTimeFormatter.ofPattern("HH:mm")
-        val formattedDate = currentDateTime.format(formatterDate)
-        val formattedTime = currentDateTime.format(formatterTime)
-        binding.date.text = formattedDate
-        binding.time.text = formattedTime
+    private fun currentDateTime() {
+        val currentDate = SimpleDateFormat("dd MMM", Locale.getDefault()).format(Date())
+        binding.tvDate.text = currentDate
+
+        val currentTime = SimpleDateFormat("HH:mm", Locale.getDefault()).format(Date())
+        binding.tvTime.text = currentTime
+    }
+
+    private fun setupRadioGroupListener() {
+        binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
+            selectedColor = when (checkedId) {
+                R.id.radio_btn_black -> "black"
+                R.id.radio_btn_white -> "white"
+                R.id.radio_btn_red -> "red"
+                else -> "black"
+            }
+            updateBackgroundColor()
+        }
+    }
+
+    private fun setTextColor(color: Int) {
+        val context = requireContext()
+        binding.etDescription.setTextColor(ContextCompat.getColor(context, color))
+        binding.etTitle.setTextColor(ContextCompat.getColor(context, color))
+        binding.tvDate.setTextColor(ContextCompat.getColor(context, color))
+        binding.tvTime.setTextColor(ContextCompat.getColor(context, color))
+    }
+
+    private fun updateBackgroundColor() {
+        val context = requireContext()
+        val colorResId = when (selectedColor) {
+            "white" -> {
+                setTextColor(R.color.beige)
+                R.color.whiteRadio
+            }
+            "red" -> {
+                setTextColor(R.color.orange)
+                R.color.redRadio
+            }
+            else -> {
+                setTextColor(R.color.white)
+                R.color.blackRadio
+            }
+        }
+        binding.root.setBackgroundColor(ContextCompat.getColor(context, colorResId))
+    }
+
+    private fun textWatcher() {
+        val textWatcher = object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val title = binding.etTitle.text.isNotEmpty()
+                val description = binding.etDescription.text.isNotEmpty()
+                binding.btnAddText.visibility =
+                    if (title && description) View.VISIBLE else View.GONE
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        }
+        binding.etTitle.addTextChangedListener(textWatcher)
+        binding.etDescription.addTextChangedListener(textWatcher)
     }
 }
